@@ -1,11 +1,4 @@
-<form *ngIf="this.perfiles.length" [formGroup]="formulario" (ngSubmit)="submitFormulario()">
-  <input type="text" formControlName="nombre" placeholder="Nombre">
-  <p *ngIf="this.formulario.controls['nombre'].errors?.['required'] && this.formulario.controls['nombre'].touched" style="color: red;">El nombre obligatorio</p>
-  <input type="text" formControlName="correo" placeholder="Correo">
-  <p *ngIf="this.formulario.controls['correo'].errors?.['required'] && this.formulario.controls['correo'].touched" style="color: red;">El correo es obligatorio</p>
-  <p *ngIf="this.formulario.controls['correo'].errors?.['email'] && this.formulario.controls['correo'].touched" style="color: red;">Debe ser un correo valido</p>
-  <select formControlName="perfil" >
-    <option *ngFor="let perfil of perfiles; let i = index" [value]="perfil.id">{{ perfil.value }}</option>
-  </select>
-  <button type="submit">Guardar</button>
-</form>
+
+
+<app-user-form></app-user-form>
+<app-grilla></app-grilla>

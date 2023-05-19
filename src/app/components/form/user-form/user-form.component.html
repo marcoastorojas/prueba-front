@@ -1,0 +1,17 @@
+<section style="display: flex; justify-content: center; margin-top: 25px; margin-bottom: 25px; height: 150px;">
+  <form *ngIf="this.perfiles.length" [formGroup]="formulario" (ngSubmit)="submitFormulario()">
+      <input type="text" formControlName="nombre" placeholder="Nombre">
+      <div style="height: 20px; margin-bottom: 5px;">
+        <p *ngIf="this.formulario.controls['nombre'].errors?.['required'] && this.formulario.controls['nombre'].touched" style="color: red;">El nombre obligatorio</p>
+      </div>
+      <input type="text" formControlName="correo" placeholder="Correo">
+      <div style="height: 20px; margin-bottom: 5;">
+        <p *ngIf="this.formulario.controls['correo'].errors?.['required'] && this.formulario.controls['correo'].touched" style="color: red;">El correo es obligatorio</p>
+        <p *ngIf="this.formulario.controls['correo'].errors?.['email'] && this.formulario.controls['correo'].touched" style="color: red;">Debe ser un correo valido</p>
+      </div>
+      <select formControlName="perfil" >
+        <option *ngFor="let perfil of perfiles; let i = index" [value]="perfil.id">{{ perfil.value }}</option>
+      </select>
+      <button type="submit">Guardar</button>
+    </form>
+</section>

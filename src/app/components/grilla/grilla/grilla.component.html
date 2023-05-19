@@ -1,0 +1,57 @@
+<main class="table">
+    <section class="table__body">
+        <div>
+        </div>
+        <table>
+            <thead>
+                <tr>
+                    <th> Nombre </th>
+                    <th> Correo </th>
+                    <th> Perfil </th>
+                    <th> Actions </th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let user of this.usersToAdd; let i = index">
+                <tr>
+                    <td> 
+                        <span *ngIf="this.itemToEdit !== i; else editnombre" >
+                            {{user.nombre}}
+                        </span>
+                        <ng-template #editnombre>
+                            <input class="changename" type="text" [value]="user.nombre">
+                        </ng-template>
+                    </td>
+                    <td> 
+                        <span *ngIf="this.itemToEdit !== i; else editcorreo" >
+                            {{user.correo}}    
+                        </span>
+                        <ng-template #editcorreo>
+                            <input class="changecorreo" type="text" [value]="user.correo">
+                        </ng-template>
+                    </td>
+                    <td> 
+                        <span *ngIf="this.itemToEdit !== i; else editperfil" >
+                            {{this.getPerfilById(user.perfilId)}}
+                        </span>
+                        <ng-template #editperfil>
+                            <select>
+                                <option *ngFor="let perfil of perfiles" [value]="perfil.id" [selected]="user.perfilId===perfil.id">{{perfil.value}}</option>
+                            </select>
+                        </ng-template>
+                     </td>
+                    <td>
+                        <div *ngIf="this.itemToEdit !== i; else edit">
+                            <!-- <p class="status delivered" (click)="editRegistro(i)">Edit</p> -->
+                            <p class="status cancelled" (click)="deleteUser(i)">Delete</p>
+                        </div>
+                        <ng-template #edit>
+                            <p class="status delivered" #element (click)="this.confirmChange(element,i)">Confirm</p>
+                            <p class="status cancelled" (click)="this.cancel()">Cancel</p>
+                        </ng-template>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+</main>
